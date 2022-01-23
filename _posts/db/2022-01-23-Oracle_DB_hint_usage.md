@@ -11,8 +11,6 @@ tags:
 last_modified_at: 2022-01-23T08:06:00-05:00
 ---
 
-<h2> # HINT # </h2>
-
 <h3> [Definition?] </h3>
 
 - SQL 튜닝 지시자 <br>
@@ -96,23 +94,25 @@ Nested Loop 조인이 이루어지지 않음 <br><br>
 <h4> 어떤 인덱스를 힌트로 쓰는게 좋을까?</h4>
 <h5> Clustered Index vs Non-clustered Index </h5>
 
-- Clustered Index<br>
-테이블당 1개<br>
-PK가 존재할 시에 자동으로 Clustered Index<br>
-항상 정렬 상태를 유지하므로 Insert, Delete, Update 속도가 느림<br>
+- Clustered Index<br><br>
+테이블당 1개,<br>
+PK가 존재할 시에 자동으로 Clustered Index,<br>
+항상 정렬 상태를 유지하므로 Insert, Delete, Update 속도가 느림,<br>
 리프 노드가 데이터 페이지이므로, Non-clustered Index보다 빠름<br><br>
 
   ![](images/클러스터_인덱스.png)
-<h6> 출처 : https://junghn.tistory.com/
 
-- Non-clustered Index<br>
-테이블당 여러개 사용 가능 <br>
-정렬 상태를 유지하지 않으므로 Insert, Delete, Update 속도가 빠름<br>
-결합 인덱스로 구성이 가능하며, 컬럼 순서를 올바르게 지정해야 효율적인 탐색이 가능<br>
+<h6> 출처 : https://junghn.tistory.com/ </h6>
+
+- Non-clustered Index<br><br>
+테이블당 여러개 사용 가능,<br>
+정렬 상태를 유지하지 않으므로 Insert, Delete, Update 속도가 빠름,<br>
+결합 인덱스로 구성이 가능하며, 컬럼 순서를 올바르게 지정해야 효율적인 탐색이 가능,<br>
 리프 노드에서 데이터 페이지로 이동이 필요하므로, Clustered Index보다 느림<br><br>
 
   ![](images/논클러스터_인덱스.png)
-<h6> 출처 : https://junghn.tistory.com/
+
+<h6> 출처 : https://junghn.tistory.com/ <br>
 
 <h5> 결합 인덱스 vs 결합 인덱스 </h5>
 
@@ -124,15 +124,14 @@ C1->C2->C3 순으로 정렬이 이루어진다. <br><br>
 IDX2(C2, C1, C3) 사용 시,<br>
 C2->C1->C3 순으로 정렬이 이루어진다.<br><br>
 - 정렬이 중요하지 않고 성능이 중요한 경우라면,<br>
-드라이빙 테이블의 범위가 작아지는 인덱스 사용
-
+드라이빙 테이블의 범위가 작아지는 인덱스 사용<br>
 
 <h3> [힌트는 항상 좋은가?] </h3>
 
-- 옵티마이저가 더 똑똑할 수 있다...
-- 옵티마이저의 실행 계획을 정확히 이해하고, 설계한 Hint여야 한다.
-- 특정 시점에 맞춰 적용된 Hint는 데이터가 변경되면서 추후에 문제가 될 수 있다.
-- 충분한 고려없이 적용한 Hint 사용은 오히려 성능 저하로 이어진다.
+- 옵티마이저가 더 똑똑할 수 있다...<br>
+- 옵티마이저의 실행 계획을 정확히 이해하고, 설계한 Hint여야 한다.<br>
+- 특정 시점에 맞춰 적용된 Hint는 데이터가 변경되면서 추후에 문제가 될 수 있다.<br>
+- 충분한 고려없이 적용한 Hint 사용은 오히려 성능 저하로 이어진다.<br>
 
 
 
