@@ -29,11 +29,12 @@ last_modified_at: 2022-01-23T15:46:00-05:00
 ### 데이터 값을 정렬해야할 경우?
 
 ---
-> ####order by?
+
+> #### order by?
 
 - order by는 데이터를 full scan해서 정렬하기 때문에 비효율적
 
-> ####Example
+> #### Example
 
 - 가정 : IDX1(MBR_AGE), IDX2(MBR_MONEY) <br>
 
@@ -66,7 +67,7 @@ WHERE MBR_AGE >= 30 AND MBR_MONEY >= 1000;
 ### Driving Table을 제어하고 싶을 경우?
 
 ---
->  #### Driving Table 
+> #### Driving Table 
 
 - JOIN시에 먼저 접근되는 테이블<br>
 - 테이블의 처리 범위를 좁혀 효율적인 JOIN이 이루어지는게 목적<br>
@@ -101,9 +102,9 @@ Nested Loop 조인이 이루어지지 않음 <br><br>
 
 ---
 
-> #### 어떤 인덱스를 힌트로 쓰는게 좋을까?</h4>
-
-#####Clustered Index vs Non-clustered Index
+> #### 어떤 인덱스를 힌트로 쓰는게 좋을까?
+  
+##### Clustered Index vs Non-clustered Index
 
 | Clustered Index | Non-clustered Index |
 |---|---|
