@@ -8,7 +8,7 @@ categories:
 tags:
 - 2022, hint, driving table, optimization
 
-last_modified_at: 2022-01-23T08:06:00-05:00
+last_modified_at: 2022-01-23T15:46:00-05:00
 ---
 
 <h3> [Definition?] </h3>
