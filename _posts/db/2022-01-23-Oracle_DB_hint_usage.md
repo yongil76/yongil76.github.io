@@ -69,7 +69,7 @@ WHERE MBR_AGE >= 30 AND MBR_MONEY >= 1000;
 - 드라이빙 테이블은 Full scan이 발생<br>
 
 ![](/assets/images/db/drvingtable_def.png)
-출처 : https://sparkdia.tistory.com/18 <br>
+<https://sparkdia.tistory.com/18> <br>
 
 <h4> &nbsp; Optimizer의 Driving Table 선정 기준</h4>
 
@@ -106,7 +106,7 @@ PK가 존재할 시에 자동으로 Clustered Index,<br>
 리프 노드가 데이터 페이지이므로, Non-clustered Index보다 빠름<br><br>
 
   ![](/assets/images/db/클러스터_인덱스.png)
-출처 : https://junghn.tistory.com/
+<https://junghn.tistory.com/>
 <br><br>
 
 - Non-clustered Index<br><br>
@@ -116,7 +116,7 @@ PK가 존재할 시에 자동으로 Clustered Index,<br>
 리프 노드에서 데이터 페이지로 이동이 필요하므로, Clustered Index보다 느림<br><br>
 
   ![](/assets/images/db/논클러스터_인덱스.png)
-출처 : https://junghn.tistory.com/
+<https://junghn.tistory.com/>
 <br>
 
 <h5> 결합 인덱스 vs 결합 인덱스 </h5>
