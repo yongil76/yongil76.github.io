@@ -10,9 +10,9 @@ tags:
 
 toc: true
 
-toc_sticky: false
+toc_sticky: true
 
-toc_label: 
+toc_label: "Index"
 
 last_modified_at: 2022-01-23T15:46:00-05:00
 
