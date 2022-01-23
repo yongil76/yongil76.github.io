@@ -11,19 +11,22 @@ tags:
 last_modified_at: 2022-01-23T15:46:00-05:00
 ---
 
-<h3> [Definition?] </h3>
+<h3> Definition? </h3>
+---
 
 - SQL 튜닝 지시자 <br>
 - Oracle Optimizer에 의존하지 않고 Custom 튜닝이 가능
 
-<h3> [When?] </h3>
+<h3> When? </h3>
+---
 
 - 데이터 값을 정렬해야할 경우 효과적으로 사용 가능<br>
 - 드라이빙 테이블을 제어하고 싶을 경우<br>
 - 사용하고 싶은 인덱스를 바꾸고 싶을 경우<br>
 
-<h3> [데이터 값을 정렬해야할 경우?]</h3>
-<h4> &nbsp;order by?</h4> 
+<h3> 데이터 값을 정렬해야할 경우?</h3>
+---
+<h4> &nbsp;order by?</h4>
 
 - order by는 데이터를 full scan해서 정렬하기 때문에 비효율적
 
@@ -57,7 +60,8 @@ WHERE MBR_AGE >= 30 AND MBR_MONEY >= 1000;
 - ⬆️ 인덱스 힌트를 통해서 ORDER BY 제거
 
 
-<h3> [Driving Table을 제어하고 싶을 경우?]</h3>
+<h3> Driving Table을 제어하고 싶을 경우?</h3>
+---
 <h4> &nbsp; Driving Table </h4>
 
 - JOIN시에 먼저 접근되는 테이블<br>
@@ -89,7 +93,8 @@ Nested Loop 조인이 이루어지지 않음 <br><br>
 - 조인 방식 USE_NL, USE_HASH과 함께 사용
 
 
-<h3> [사용하고 싶은 인덱스를 바꾸고 싶을 경우]</h3>
+<h3> 사용하고 싶은 인덱스를 바꾸고 싶을 경우</h3>
+---
 
 <h4> 어떤 인덱스를 힌트로 쓰는게 좋을까?</h4>
 <h5> Clustered Index vs Non-clustered Index </h5>
@@ -126,7 +131,8 @@ C2->C1->C3 순으로 정렬이 이루어진다.<br><br>
 - 정렬이 중요하지 않고 성능이 중요한 경우라면,<br>
 드라이빙 테이블의 범위가 작아지는 인덱스 사용<br>
 
-<h3> [힌트는 항상 좋은가?] </h3>
+<h3> 힌트는 항상 좋은가] </h3>
+---
 
 - 옵티마이저가 더 똑똑할 수 있다...<br>
 - 옵티마이저의 실행 계획을 정확히 이해하고, 설계한 Hint여야 한다.<br>
