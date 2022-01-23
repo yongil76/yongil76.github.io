@@ -121,6 +121,7 @@ WHERE MBR_AGE >= 30 AND MBR_MONEY >= 1000;
 > #### 어떤 인덱스를 힌트로 쓰는게 좋을까?
   
 ##### Clustered Index vs Non-clustered Index
+---
 
 | Clustered Index | Non-clustered Index |
 |---|---|
@@ -132,10 +133,13 @@ WHERE MBR_AGE >= 30 AND MBR_MONEY >= 1000;
 
   ![](/assets/images/db/클러스터_인덱스.png)
   *Clustered index*
+<br><br>
   ![](/assets/images/db/논클러스터_인덱스.png)
   *Non-clustered index*
 
+---
 ##### 결합 인덱스 vs 결합 인덱스
+---
 
 - 가정 : IDX1(C1, C2, C3), IDX2(C2, C1, C3)
 <br><br>
