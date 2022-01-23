@@ -26,11 +26,11 @@ last_modified_at: 2022-01-23T15:46:00-05:00
 
 <h3> 데이터 값을 정렬해야할 경우?</h3>
 ---
-<h4> &nbsp;order by?</h4>
+> order by?
 
 - order by는 데이터를 full scan해서 정렬하기 때문에 비효율적
 
-<h4> &nbsp;Example</h4> 
+> Example
 
 - 가정 : IDX1(MBR_AGE), IDX2(MBR_MONEY) <br>
 
@@ -62,7 +62,7 @@ WHERE MBR_AGE >= 30 AND MBR_MONEY >= 1000;
 
 <h3> Driving Table을 제어하고 싶을 경우?</h3>
 ---
-<h4> &nbsp; Driving Table </h4>
+>  Driving Table 
 
 - JOIN시에 먼저 접근되는 테이블<br>
 - 테이블의 처리 범위를 좁혀 효율적인 JOIN이 이루어지는게 목적<br>
@@ -71,7 +71,7 @@ WHERE MBR_AGE >= 30 AND MBR_MONEY >= 1000;
 ![](/assets/images/db/drvingtable_def.png)
 <https://sparkdia.tistory.com/18> <br>
 
-<h4> &nbsp; Optimizer의 Driving Table 선정 기준</h4>
+> Optimizer의 Driving Table 선정 기준
 
 ~~~sql
 SELECT * 
@@ -86,7 +86,7 @@ WHERE MEMBER.DEPT_NO = DEPT.DEPT_NO
 - MEMBER, DEPT 모두 인덱스가 없는 경우<br>
 Nested Loop 조인이 이루어지지 않음 <br><br>
 
-<h4> &nbsp;Driving Table hint </h4>
+> Driving Table hint
 
 - /*+LEADING */ = 테이블 접근 순서 지정 가능
 - /*+ORDERED */ = From 테이블 접근 순서 유지
@@ -96,40 +96,40 @@ Nested Loop 조인이 이루어지지 않음 <br><br>
 <h3> 사용하고 싶은 인덱스를 바꾸고 싶을 경우</h3>
 ---
 
-<h4> 어떤 인덱스를 힌트로 쓰는게 좋을까?</h4>
+> 어떤 인덱스를 힌트로 쓰는게 좋을까?</h4>
+> 
 <h5> Clustered Index vs Non-clustered Index </h5>
 
-- Clustered Index<br><br>
-테이블당 1개,<br>
-PK가 존재할 시에 자동으로 Clustered Index,<br>
-항상 정렬 상태를 유지하므로 Insert, Delete, Update 속도가 느림,<br>
-리프 노드가 데이터 페이지이므로, Non-clustered Index보다 빠름<br><br>
+- Clustered Index<br>
+  - 테이블당 1개<br>
+  - PK가 존재할 시에 자동으로 Clustered Index<br>
+  - 항상 정렬 상태를 유지하므로 Insert, Delete, Update 속도가 느림<br>
+  - 리프 노드가 데이터 페이지이므로, Non-clustered Index보다 빠름<br><br>
 
-  ![](/assets/images/db/클러스터_인덱스.png)
-<https://junghn.tistory.com/>
-<br><br>
+    ![](/assets/images/db/클러스터_인덱스.png)
+  <https://junghn.tistory.com/>
+  <br><br>
 
-- Non-clustered Index<br><br>
-테이블당 여러개 사용 가능,<br>
-정렬 상태를 유지하지 않으므로 Insert, Delete, Update 속도가 빠름,<br>
-결합 인덱스로 구성이 가능하며, 컬럼 순서를 올바르게 지정해야 효율적인 탐색이 가능,<br>
-리프 노드에서 데이터 페이지로 이동이 필요하므로, Clustered Index보다 느림<br><br>
+- Non-clustered Index<br>
+  - 테이블당 여러개 사용 가능<br>
+  - 정렬 상태를 유지하지 않으므로 Insert, Delete, Update 속도가 빠름<br>
+  - 합 인덱스로 구성이 가능하며, 컬럼 순서를 올바르게 지정해야 효율적인 탐색이 가능<br>
+  - 리프 노드에서 데이터 페이지로 이동이 필요하므로, Clustered Index보다 느림<br><br>
 
   ![](/assets/images/db/논클러스터_인덱스.png)
 <https://junghn.tistory.com/>
-<br>
 
 <h5> 결합 인덱스 vs 결합 인덱스 </h5>
 
 - 가정 : IDX1(C1, C2, C3), IDX2(C2, C1, C3)
 <br><br>
 - 정렬이 중요한 경우라면,<br> 
-IDX1(C1, C2, C3) 사용 시, <br>
-C1->C2->C3 순으로 정렬이 이루어진다. <br><br>
-IDX2(C2, C1, C3) 사용 시,<br>
-C2->C1->C3 순으로 정렬이 이루어진다.<br><br>
-- 정렬이 중요하지 않고 성능이 중요한 경우라면,<br>
-드라이빙 테이블의 범위가 작아지는 인덱스 사용<br>
+  - IDX1(C1, C2, C3) 사용 시, <br>
+  - C1->C2->C3 순으로 정렬이 이루어진다. <br><br>
+  - IDX2(C2, C1, C3) 사용 시,<br>
+  - C2->C1->C3 순으로 정렬이 이루어진다.<br><br>
+- 정렬이 중요하지 않고 성능이 중요한 경우라면
+  - 드라이빙 테이블의 범위가 작아지는 인덱스 사용<br>
 
 <h3> 힌트는 항상 좋은가? </h3>
 ---
