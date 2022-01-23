@@ -60,7 +60,7 @@ WHERE MBR_AGE >= 30 AND MBR_MONEY >= 1000
 ORDER BY MBR_MONEY;
 ~~~
 
-- MBR_MONEY가 오름차순으로 출력되기 원해서 <mark style='background-color: #fff5b1'> ORDER BY를 사용하면 성능 저하가 발생dddd, IDX2의 정렬 기능을 이용하지 못한채 Full scan 정렬이 발생했기 때문
+- MBR_MONEY가 오름차순으로 출력되기 원해서 <mark style='background-color: #fff5b1'> ORDER BY를 사용하면 성능 저하가 발생</mark>, IDX2의 정렬 기능을 이용하지 못한채 Full scan 정렬이 발생했기 때문
 
 ~~~sql
 SELECT /*+ INDEX(MEMBER IDX2) */ *
