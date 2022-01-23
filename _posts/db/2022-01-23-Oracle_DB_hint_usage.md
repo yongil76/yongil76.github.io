@@ -6,7 +6,7 @@ categories:
 - DB
   
 tags:
-- 2022, hint, driving table, optimization
+- Tuning
 
 last_modified_at: 2022-01-23T15:46:00-05:00
 ---
@@ -40,7 +40,7 @@ FROM MEMBER
 WHERE MBR_AGE >= 30 AND MBR_MONEY >= 1000;
 ~~~
 
-- ⬆️ Optimizer는 IDX1, IDX2중에 COST 계산 후 근소한 차이로 IDX1을 사용했다고 가정하면, IDX1인 MBR_AGE가 오름차순 정렬로 출력<br>
+-  :arrow_up: Optimizer는 IDX1, IDX2중에 COST 계산 후 근소한 차이로 IDX1을 사용했다고 가정하면, IDX1인 MBR_AGE가 오름차순 정렬로 출력<br>
 
 ~~~sql
 SELECT *
@@ -49,7 +49,7 @@ WHERE MBR_AGE >= 30 AND MBR_MONEY >= 1000
 ORDER BY MBR_MONEY;
 ~~~
 
-- ⬆️ MBR_MONEY가 오름차순으로 출력되기 원해서 ORDER BY를 사용하면 성능 저하가 발생, IDX2의 정렬 기능을 이용하지 못한채 Full scan 정렬이 발생했기 때문
+- :arrow_up: MBR_MONEY가 오름차순으로 출력되기 원해서 ORDER BY를 사용하면 성능 저하가 발생, IDX2의 정렬 기능을 이용하지 못한채 Full scan 정렬이 발생했기 때문
 
 ~~~sql
 SELECT /*+ INDEX(MEMBER IDX2) */ *
@@ -57,7 +57,7 @@ FROM MEMBER
 WHERE MBR_AGE >= 30 AND MBR_MONEY >= 1000;
 ~~~
 
-- ⬆️ 인덱스 힌트를 통해서 ORDER BY 제거
+- :arrow_up:️ 인덱스 힌트를 통해서 ORDER BY 제거
 
 
 <h3> Driving Table을 제어하고 싶을 경우?</h3>
