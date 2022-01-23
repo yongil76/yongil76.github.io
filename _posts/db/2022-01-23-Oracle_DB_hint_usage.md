@@ -105,7 +105,6 @@ Nested Loop 조인이 이루어지지 않음 <br><br>
 > #### 어떤 인덱스를 힌트로 쓰는게 좋을까?
   
 ##### Clustered Index vs Non-clustered Index
-
 | Clustered Index | Non-clustered Index |
 |---|---|
 | 테이블당 1개 | 테이블당 여러개 사용 가능 |
@@ -113,9 +112,10 @@ Nested Loop 조인이 이루어지지 않음 <br><br>
 | PK가 존재할 시에 자동으로 Clustered Index | 합 인덱스로 구성이 가능하며, 컬럼 순서를 올바르게 지정해야 효율적인 탐색이 가능 |
 |  리프 노드가 데이터 페이지이므로, Non-clustered Index보다 빠름 | 리프 노드에서 데이터 페이지로 이동이 필요하므로, Clustered Index보다 느림 |
 
-  ![](/assets/images/db/클러스터_인덱스.png)
-  ![](/assets/images/db/논클러스터_인덱스.png)
-  <https://junghn.tistory.com/>
+  ![](/assets/images/db/클러스터_인덱스.png){: .align-center}
+  *Clustered index[<https://junghn.tistory.com/>]* 
+  ![](/assets/images/db/논클러스터_인덱스.png){: .align-center}
+  *Non-clustered index[<https://junghn.tistory.com/>]*
 
 
 ##### 결합 인덱스 vs 결합 인덱스
