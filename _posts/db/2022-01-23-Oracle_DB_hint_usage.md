@@ -102,7 +102,8 @@ PK가 존재할 시에 자동으로 Clustered Index,<br>
 
   ![](images/클러스터_인덱스.png)
 
-<h6> 출처 : https://junghn.tistory.com/ </h6>
+출처 : https://junghn.tistory.com/
+<br>
 
 - Non-clustered Index<br><br>
 테이블당 여러개 사용 가능,<br>
@@ -112,7 +113,8 @@ PK가 존재할 시에 자동으로 Clustered Index,<br>
 
   ![](images/논클러스터_인덱스.png)
 
-<h6> 출처 : https://junghn.tistory.com/ <br>
+출처 : https://junghn.tistory.com/
+<br>
 
 <h5> 결합 인덱스 vs 결합 인덱스 </h5>
 
