@@ -112,9 +112,10 @@ Nested Loop 조인이 이루어지지 않음 <br><br>
 | 리프 노드가 데이터 페이지이므로, Non-clustered Index보다 빠름 | 리프 노드에서 데이터 페이지로 이동이 필요하므로, Clustered Index보다 느림 |
 
 
-  ![Clustered index](/assets/images/db/클러스터_인덱스.png)
-  ![Non-clustered index](/assets/images/db/논클러스터_인덱스.png)
-
+  ![](/assets/images/db/클러스터_인덱스.png)
+  *Clustered index*
+  ![](/assets/images/db/논클러스터_인덱스.png)
+  *Non-clustered index*
 
 ##### 결합 인덱스 vs 결합 인덱스
 
