@@ -72,9 +72,7 @@ WHERE MBR_AGE >= 30 AND MBR_MONEY >= 1000;
 - JOIN시에 먼저 접근되는 테이블<br>
 - 테이블의 처리 범위를 좁혀 효율적인 JOIN이 이루어지는게 목적<br>
 - 드라이빙 테이블은 Full scan이 발생<br>
-
 ![](/assets/images/db/drvingtable_def.png)
-<https://sparkdia.tistory.com/18> <br>
 
 > #### Optimizer의 Driving Table 선정 기준
 
@@ -112,10 +110,8 @@ Nested Loop 조인이 이루어지지 않음 <br><br>
 | PK가 존재할 시에 자동으로 Clustered Index | 합 인덱스로 구성이 가능하며, 컬럼 순서를 올바르게 지정해야 효율적인 탐색이 가능 |
 |  리프 노드가 데이터 페이지이므로, Non-clustered Index보다 빠름 | 리프 노드에서 데이터 페이지로 이동이 필요하므로, Clustered Index보다 느림 |
 
-  ![](/assets/images/db/클러스터_인덱스.png){: .align-center}
-  *Clustered index[<https://junghn.tistory.com/>]* 
-  ![](/assets/images/db/논클러스터_인덱스.png){: .align-center}
-  *Non-clustered index[<https://junghn.tistory.com/>]*
+  ![Clustered index](/assets/images/db/클러스터_인덱스.png)
+  ![Non-clustered index](/assets/images/db/논클러스터_인덱스.png)
 
 
 ##### 결합 인덱스 vs 결합 인덱스
@@ -140,4 +136,13 @@ Nested Loop 조인이 이루어지지 않음 <br><br>
 - 충분한 고려없이 적용한 Hint 사용은 오히려 성능 저하로 이어진다.<br>
 
 
+### Reference
 
+--- 
+
+- https://junghn.tistory.com/
+  - Clustered index
+  - Non-clustered index
+
+- https://sparkdia.tistory.com/18
+  - Driving Table
