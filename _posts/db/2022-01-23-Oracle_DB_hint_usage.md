@@ -63,9 +63,9 @@ WHERE MBR_AGE >= 30 AND MBR_MONEY >= 1000;
 - JOIN시에 먼저 접근되는 테이블<br>
 - 테이블의 처리 범위를 좁혀 효율적인 JOIN이 이루어지는게 목적<br>
 - 드라이빙 테이블은 Full scan이 발생<br>
-- 그림 참고(출처 : https://sparkdia.tistory.com/18)<br>
 
-![](images/drvingtable_def.png)
+![](/assets/images/db/drvingtable_def.png)
+출처 : https://sparkdia.tistory.com/18 <br>
 
 <h4> &nbsp; Optimizer의 Driving Table 선정 기준</h4>
 
@@ -100,10 +100,9 @@ PK가 존재할 시에 자동으로 Clustered Index,<br>
 항상 정렬 상태를 유지하므로 Insert, Delete, Update 속도가 느림,<br>
 리프 노드가 데이터 페이지이므로, Non-clustered Index보다 빠름<br><br>
 
-  ![](images/클러스터_인덱스.png)
-
+  ![](/assets/images/db/클러스터_인덱스.png)
 출처 : https://junghn.tistory.com/
-<br>
+<br><br>
 
 - Non-clustered Index<br><br>
 테이블당 여러개 사용 가능,<br>
@@ -111,8 +110,7 @@ PK가 존재할 시에 자동으로 Clustered Index,<br>
 결합 인덱스로 구성이 가능하며, 컬럼 순서를 올바르게 지정해야 효율적인 탐색이 가능,<br>
 리프 노드에서 데이터 페이지로 이동이 필요하므로, Clustered Index보다 느림<br><br>
 
-  ![](images/논클러스터_인덱스.png)
-
+  ![](/assets/images/db/논클러스터_인덱스.png)
 출처 : https://junghn.tistory.com/
 <br>
 
