@@ -92,7 +92,7 @@ WHERE MEMBER.DEPT_NO = DEPT.DEPT_NO
 - MEMBER, DEPT 모두 인덱스가 존재할 경우 <br>
 두 테이블 중 조회 결과가 적은 테이블을 드라이빙 테이블로 선정 <br><br>
 - MEMBER, DEPT 중에 한쪽만 인덱스가 없는 경우 <br>
-<mark style='background-color: #fff5b1'> 두 테이블 중 조회 결과가 적은 테이블을 드라이빙 테이블로 선정 </mark><br><br>
+<mark style='background-color: #fff5b1'> 인덱스가 없는 테이블을 드라이빙  </mark><br><br>
 
 - MEMBER, DEPT 모두 인덱스가 없는 경우<br>
 Nested Loop 조인이 이루어지지 않음 <br><br>
@@ -149,7 +149,7 @@ WHERE MBR_AGE >= 30 AND MBR_MONEY >= 1000;
   - IDX2(C2, C1, C3) 사용 시,<br>
   - C2->C1->C3 순으로 정렬이 이루어진다.<br><br>
 - 정렬이 중요하지 않고 성능이 중요한 경우라면
-  - 드라이빙 테이블의 범위가 작아지는 인덱스 사용<br>
+  - 선행 컬럼을 통해 스캔 범위가 좁아지도록 결정<br>
 
 ### 힌트는 항상 좋은가?
 
