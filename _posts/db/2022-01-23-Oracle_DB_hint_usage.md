@@ -1,6 +1,6 @@
 ---
 title:  "Oracle DB hint usage"
-excerpt: ""
+excerpt: "오라클 DB 힌트 사용"
 
 categories:
 - DB
