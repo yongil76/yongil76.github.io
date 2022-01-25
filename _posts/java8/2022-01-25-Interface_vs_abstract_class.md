@@ -20,8 +20,6 @@ last_modified_at: 2022-01-23T15:46:00-05:00
 
 ## Java 8 이전?
 
----
-
 ### Interface
 - 인터페이스를 구현하는 클래스에서 해당 메소드들을 구현해야함
 
@@ -103,8 +101,6 @@ public class Java8Class implements Java8Interface{
 ---
 
 ## Java8 Interface vs Abstract class
-
----
 
 ###  <mark style='background-color: #fff5b1'> 인터페이스는 상태를 가지지 못한다. </mark>
   - 클래스는 인스턴스를 만들 수 있으며, 인스턴스 변수들을 가질 수 있음
