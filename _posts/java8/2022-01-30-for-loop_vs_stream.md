@@ -137,7 +137,7 @@ final List<Byte> collect = list.stream()
   - <mark style='background-color: #fff5b1'>parllelStream()으로 간단하게 병렬 처리가 가능</mark>
   - 데이터 수에 대한 정확한 기준이 없으므로, 구축된 환경에 맞게 데이터 수에 대한 기준을 세우기 위한 테스트 필요
 - 가독성이 좋고 유지 보수가 용이함
-  - for문에 많은 로직이 포함되어 있다면, 가독성이 떨어질 수 밖에 없기 때문
+  - for문에 많은 로직이 포함되어 있다면, 가독성이 떨어짐
 
 ---
 
@@ -164,9 +164,8 @@ public void forEach(Consumer<? super E> action) {
 }
 ~~~
 
-for-loop에 대한 호출과 함수형 인터페이스를 검증하기 위한 코드가 삽입되었기 때문에 오버헤드가 발생한 것인데, 
+for-loop에 대한 호출과 함수형 인터페이스를 검증하기 위한 코드가 있기 때문에 오버헤드가 발생했다. 
 데이터의 수가 작을수록 for문으로 순회하는 시간이 작기 때문에 추가된 코드들이 경과 시간에 영향을 줄 수 있게 된다.
 
-> forEach()만을 사용하는 stream()은 지양해야 한다. <mark style='background-color: #fff5b1'>여러 장단점을 고려해서
-stream()을 사용할지 for-loop를 사용할지 고민하는 것이 필요하다.</mark> 그 기준은 성능이 될 수도 있고, 가독성이 될 수도
-있고 그외의 것들이 될 수도 있다.
+> forEach()만을 사용하는 stream()은 지양해야 한다. <mark style='background-color: #fff5b1'>데이터를 여러 차례에 걸쳐 가공이 필요할 때
+> stream()을 쓰는 것이 맞다.</mark> 
