@@ -142,7 +142,7 @@ final List<Byte> collect = list.stream()
 ---
 
 
-## Conclusion
+## Conclusion?
 
 ~~~java
   list.forEach(item -> func(item));
