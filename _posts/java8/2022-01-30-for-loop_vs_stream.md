@@ -58,7 +58,7 @@ final List<Byte> collect = list.stream()
 ~~~
 ---
 ### Lazy Evaluation
-- ####Lazy Evaluation
+- Lazy Evaluation
   - 함수형 프로그래밍에서 적용되며, 계산값(Parameter)가 들어올때까지 계산을 늦춤
   - ~~~ java
     @Test
@@ -73,7 +73,7 @@ final List<Byte> collect = list.stream()
     }
       ~~~
   - 수식을 저장하는 별도의 함수 공간이 필요하며, lazy.get()에 대한 수식 결과를 저장하지 않고, 계산해야 할 값이 들어올때 수식 계산
-- ####Eager Evalution
+- Eager Evalution
   - 함수형 프로그래밍과 반대로 수식에 대해서 별도의 저장이 필요하지 않음
   - ~~~ java
       x = 5 + 3 * (1 + 5 ^ 2);
@@ -82,8 +82,6 @@ final List<Byte> collect = list.stream()
       ~~~
   - x에 처음 출력될 때, 83이 x의 공간에 저장되고, x + 2가 호출되면 83 + 2로 변환
   - 수식에 대한 결과가 바로 저장되기 때문에, 계산해야 할 값이 하나만 존재한다면 효율적으로 사용 가능
-
-## convert for-loop to stream
 
 ### Example
 
