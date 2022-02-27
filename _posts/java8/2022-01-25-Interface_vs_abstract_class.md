@@ -112,7 +112,7 @@ public class Java8Class implements Java8Interface{
   - 클래스는 생성자를 가질 수 있지만, 인터페이스는 생성자를 가질 수 없음
 
 > "구성을 통해서 충분히 해결될 수 있다고 생각이 든다"
-> 
+
 ---
 
 ## Abstract class
@@ -125,6 +125,7 @@ public class Java8Class implements Java8Interface{
 - GOF의 디자인 패턴에서도 상속보다는 구성을 사용하라는 충고가 있음
 
 > "상속은 단순히 코드를 재생산하는 측면에서는 효율성이 있지만, 설계적인 측면에선 별로인게 아닐까?"
+
 ---
 
 ## Result
