@@ -112,11 +112,11 @@ public class Java8Class implements Java8Interface{
   - 클래스는 생성자를 가질 수 있지만, 인터페이스는 생성자를 가질 수 없음
 
 > "구성을 통해서 충분히 해결될 수 있다고 생각이 든다"
+> 
 ---
 
 ## Abstract class
 
----
 ### 상속보다는 구성을 사용하라
 - Java에서는 다중 상속이 불가하므로, 여러 가지 클래스에 대한 특성을 갖기 어렵지만, 구성을 사용하면 다양한 클래스에 대한 특성을 가질 수 있음
 - 구성으로 된 클래스들은 Mocking이 쉬우므로, 테스트 편의성이 증대
@@ -129,7 +129,8 @@ public class Java8Class implements Java8Interface{
 
 ## Result
 
----
 - 2021-02-27
 > "Java 8 이후로는 상속을 사용해야 하는 이유를 잘 모르겠다."
+
+
 
