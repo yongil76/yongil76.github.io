@@ -93,9 +93,8 @@ SELECT * FROM TRX PARTITION(PARTITION_NAME);
 - Local Non-Prefixed Index
   - 인덱스의 선두 컬럼이 파티션의 컬럼과 불일치
 
-- 성능 비교
-  - [Oracle Reference](https://docs.oracle.com/database/121/VLDBG/GUID-A43726D5-300D-4F5E-8FF3-85F057BC4CD3.htm#VLDBG1263)
-  -  > It is more expensive to probe into a nonprefixed index than to probe into a prefixed index. If an index is prefixed (either local or global) and Oracle is presented with a predicate involving the index columns, then partition pruning can restrict application of the predicate to a subset of the index partitions. 
+- 성능 비교(Prefixed vs Non-Prefixed)
+> It is more expensive to probe into a nonprefixed index than to probe into a prefixed index. If an index is prefixed (either local or global) and Oracle is presented with a predicate involving the index columns, then partition pruning can restrict application of the predicate to a subset of the index partitions. 
 
 #### Global Index
 - Global Prefixed Index
@@ -134,3 +133,5 @@ ORDER BY t.trx_ymdt
 --- 
 
 - [파티션 인덱스 - 구루비](http://www.gurubee.net/lecture/1914)
+- [Oracle Reference](https://docs.oracle.com/database/121/VLDBG/GUID-A43726D5-300D-4F5E-8FF3-85F057BC4CD3.htm#VLDBG1263)
+
