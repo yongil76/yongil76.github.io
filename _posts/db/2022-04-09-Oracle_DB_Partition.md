@@ -22,18 +22,15 @@ last_modified_at: 2022-04-09T15:46:00-05:00
 
 ---
 
-- Oracle Partitioning allows tables and indexes to be partitioned into smaller, more manageable units, providing database administrators with the ability to pursue a "divide and conquer" approach to data management. With partitioning, maintenance operations can be focused on particular portions of tables.
+> Oracle Partitioning allows tables and indexes to be partitioned into smaller, more manageable units, providing database administrators with the ability to pursue a "divide and conquer" approach to data management. With partitioning, maintenance operations can be focused on particular portions of tables.
 
 > 오라클에서 테이블과 인덱스가 나눠지도록 하여, 좀 더 효율적인 관리(Divide and conquer)가 가능하도록 지원하는 기능
-> 
+
 - 파티션 테이블 확인
 ~~~sql
-SELECT *
-FROM ALL_TAB_PARTITIONS
-WHERE TABLE_NAME = 'TRX';
+SELECT * FROM ALL_TAB_PARTITIONS WHERE TABLE_NAME = 'TRX';
 
-SELECT *
-FROM TRX PARTITION(PARTITION_NAME);
+SELECT * FROM TRX PARTITION(PARTITION_NAME);
 ~~~
 
 ### Partition type?
