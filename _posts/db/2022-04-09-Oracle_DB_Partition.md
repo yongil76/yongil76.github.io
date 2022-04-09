@@ -27,6 +27,7 @@ last_modified_at: 2022-04-09T15:46:00-05:00
 > 오라클에서 테이블과 인덱스가 나눠지도록 하여, 좀 더 효율적인 관리(Divide and conquer)가 가능하도록 지원하는 기능
 
 - 파티션 테이블 확인
+
 ~~~sql
 SELECT * FROM ALL_TAB_PARTITIONS WHERE TABLE_NAME = 'TRX';
 
