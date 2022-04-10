@@ -107,25 +107,31 @@ SELECT * FROM TRX PARTITION(PARTITION_NAME);
 
 #### Index hint with partition table
 ~~~sql
-SELECT /*+INDEX_DESC ( t IDX_TRX_YMDT )*/
+SELECT *
+FROM (
+       SELECT /*+INDEX_DESC ( t IDX4RM_TRX )*/
+         t.trx_seq,
+         t.trx_ymdt
+       FROM trx t
+       WHERE t.trx_ymdt >=
+             TO_DATE( /*conversionStartDate*/'2022-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS')
+         AND t.trx_ymdt <= TO_DATE( /*conversionEndDate*/'2022-01-01 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+     )
+WHERE ROWNUM <= 5;
+~~~
+~~~sql
+SELECT /*+INDEX_DESC ( t IDX4RM_TRX )*/
   t.trx_seq,
   t.trx_ymdt
 FROM trx t
-WHERE t.trx_ymdt >= TO_DATE( /*conversionStartDate*/'2022-04-09 00:00:00', 'YYYY-MM-DD HH24:MI:SS')
-  AND t.trx_ymdt <= TO_DATE( /*conversionEndDate*/'2022-04-09 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
-~~~
-~~~sql
-SELECT t.trx_seq,
-       t.trx_ymdt
-FROM trx t
-WHERE t.trx_ymdt >= TO_DATE( /*conversionStartDate*/'2022-04-09 00:00:00', 'YYYY-MM-DD HH24:MI:SS')
-  AND t.trx_ymdt <= TO_DATE( /*conversionEndDate*/'2022-04-09 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+WHERE t.trx_ymdt >= TO_DATE( /*conversionStartDate*/'2022-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS')
+  AND t.trx_ymdt <= TO_DATE( /*conversionEndDate*/'2022-01-01 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
 ORDER BY t.trx_ymdt
 ~~~
 
-> IDX_TRX_YMDT가 파티션 인덱스가 아니라면, 두 쿼리의 결과는 같을 것이고 전자의 쿼리가 인덱스를 타므로 더 좋은 쿼리라고 생각할 수 있다. 하지만 파티션 인덱스이기 때문에, 후자를 사용해야 원하는 결과를 얻을 수 있다.
+> IDX4RM_TRX가 파티션 인덱스가 아니라면, 두 쿼리의 결과는 같을 것이고 전자의 쿼리가 인덱스를 타므로 더 좋은 쿼리라고 생각할 수 있다. 하지만 파티션 인덱스이기 때문에, 후자를 사용해야 원하는 결과를 얻을 수 있다.
 
-> 전자의 쿼리 결과는 가장 후행에 위치한 파티션부터 Local Index가 확인이 될 것이므로, 파티션을 기준으로 trx_ymdt가 내림차순으로 정렬된 값이 보여지게 된다.
+> 전자의 쿼리 결과는 가장 후행에 위치한 파티션부터 Local Index가 스캔된다.
 
 
 ### Reference
