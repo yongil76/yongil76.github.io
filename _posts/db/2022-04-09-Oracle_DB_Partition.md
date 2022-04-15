@@ -29,9 +29,9 @@ last_modified_at: 2022-04-09T15:46:00-05:00
 - 파티션 테이블 확인
 
 ~~~sql
-SELECT * FROM ALL_TAB_PARTITIONS WHERE TABLE_NAME = 'TRX';
+SELECT * FROM ALL_TAB_PARTITIONS WHERE TABLE_NAME = 'TARGET';
 
-SELECT * FROM TRX PARTITION(PARTITION_NAME);
+SELECT * FROM TARGET PARTITION(PARTITION_NAME);
 ~~~
 
 ### Partition type?
@@ -40,17 +40,17 @@ SELECT * FROM TRX PARTITION(PARTITION_NAME);
 
 - 범위 파티셔닝
   ~~~sql
-  PARTITION BY RANGE(TRX_SEQ)(
-    PARTITION "TRX_202201" VALUES LESS THAN ('2022020000000000000'),
-    PARTITION "TRX_202202" VALUES LESS THAN ('2022030000000000000'),
-    PARTITION "TRX_202203" VALUES LESS THAN ('2022040000000000000')
+  PARTITION BY RANGE(TARGET_SEQ)(
+    PARTITION "TARGET_202201" VALUES LESS THAN ('2022020000000000000'),
+    PARTITION "TARGET_202202" VALUES LESS THAN ('2022030000000000000'),
+    PARTITION "TARGET_202203" VALUES LESS THAN ('2022040000000000000')
   );
   ~~~
   
 
 - 해시 파티셔닝
   ~~~sql
-  PARTITION BY HASH(TRX_TYPE_CD)(
+  PARTITION BY HASH(TARGET_TYPE_CD)(
     PARTITION TYPE1,
     PARTITION TYPE2,
     PARTITION TYPE3,
@@ -62,14 +62,14 @@ SELECT * FROM TRX PARTITION(PARTITION_NAME);
 
 - 리스트 파티셔닝
   ~~~sql
-  PARTITION BY RANGE(TRX_TYPE_CD)(
-    PARTITION "TRX_TYPE_CD" VALUE ('TYPE1'),
-    PARTITION "TRX_TYPE_CD" VALUE ('TYPE2'),
-    PARTITION "TRX_TYPE_CD" VALUE ('TYPE3')
+  PARTITION BY RANGE(TARGET_TYPE_CD)(
+    PARTITION "TARGET_TYPE_CD" VALUE ('TYPE1'),
+    PARTITION "TARGET_TYPE_CD" VALUE ('TYPE2'),
+    PARTITION "TARGET_TYPE_CD" VALUE ('TYPE3')
   );
   ~~~
   - 특정 컬럼을 기준으로 정렬
-  - TRX_TYPE_CD가 골고르게 분포될 경우에 적절
+  - TARGET_TYPE_CD가 골고르게 분포될 경우에 적절
   
 
 - 인터벌 파티셔닝 : 범위 파티셔닝과 흡사하나 스스로 새로운 파티션을 생성
@@ -82,7 +82,7 @@ SELECT * FROM TRX PARTITION(PARTITION_NAME);
 #### Partition Index / Non Partition Index
 - Partition Index 조회
   ~~~sql
-  SELECT * FROM dba_part_indexes WHERE table_name = 'TRX';
+  SELECT * FROM dba_part_indexes WHERE table_name = 'TARGET';
   ~~~
 - Partition Index : 파티션과 관련된 인덱스
 - Non Partition Index : 파티션과 무관한 인덱스
@@ -106,31 +106,30 @@ SELECT * FROM TRX PARTITION(PARTITION_NAME);
 ---
 
 #### Index hint with partition table
-> trx_seq를 기준으로 범위 파티셔닝이 되어 있는 상황으로 가정, trx_ymdt와 trx_seq는 순서에 연관 관계가 없음
+> target_seq를 기준으로 범위 파티셔닝이 되어 있는 상황으로 가정, target_ymdt와 target_seq는 순서에 연관 관계가 없음
 
 ~~~sql
 SELECT *
 FROM (
-       SELECT /*+INDEX_DESC ( t IDX4RM_TRX )*/
-         t.trx_seq,
-         t.trx_ymdt
-       FROM trx t
-       WHERE t.trx_ymdt >=
-             TO_DATE( /*conversionStartDate*/'2022-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS')
-         AND t.trx_ymdt <= TO_DATE( /*conversionEndDate*/'2022-01-01 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+       SELECT /*+INDEX_DESC ( t IDX_TARGET )*/
+         t.target_seq,
+         t.target_ymdt
+       FROM target t
+       WHERE t.target_ymdt >= TO_DATE( '2022-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS')
+         AND t.target_ymdt <= TO_DATE( '2022-01-01 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
      )
 ~~~
 ~~~sql
-SELECT /*+INDEX_DESC ( t IDX4RM_TRX )*/
-  t.trx_seq,
-  t.trx_ymdt
-FROM trx t
-WHERE t.trx_ymdt >= TO_DATE( /*conversionStartDate*/'2022-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS')
-  AND t.trx_ymdt <= TO_DATE( /*conversionEndDate*/'2022-01-01 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
-ORDER BY t.trx_ymdt
+SELECT /*+INDEX_DESC ( t IDX_TARGET )*/
+  t.target_seq,
+  t.target_ymdt
+FROM target t
+WHERE t.target_ymdt >= TO_DATE( '2022-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS')
+  AND t.target_ymdt <= TO_DATE( '2022-01-01 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+ORDER BY t.target_ymdt
 ~~~
 
-> IDX4RM_TRX가 파티션 인덱스가 아니라면, 두 쿼리의 결과는 같을 것이고 전자의 쿼리가 인덱스를 타므로 더 좋은 쿼리라고 생각할 수 있다. 하지만 파티션 인덱스이기 때문에, 후자를 사용해야 원하는 결과를 얻을 수 있다.
+> IDX_TARGET가 파티션 인덱스가 아니라면, 두 쿼리의 결과는 같을 것이고 전자의 쿼리가 인덱스를 타므로 더 좋은 쿼리라고 생각할 수 있다. 하지만 파티션 인덱스이기 때문에, 후자를 사용해야 원하는 결과를 얻을 수 있다.
 
 > 전자의 쿼리 결과는 가장 후행에 위치한 파티션부터 Local Index가 스캔된다.
 
