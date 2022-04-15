@@ -106,6 +106,7 @@ SELECT * FROM TRX PARTITION(PARTITION_NAME);
 ---
 
 #### Index hint with partition table
+> trx_seq를 기준으로 범위 파티셔닝이 되어 있는 상황으로 가정, trx_ymdt와 trx_seq는 순서에 연관 관계가 없음
 ~~~sql
 SELECT *
 FROM (
@@ -117,7 +118,6 @@ FROM (
              TO_DATE( /*conversionStartDate*/'2022-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS')
          AND t.trx_ymdt <= TO_DATE( /*conversionEndDate*/'2022-01-01 23:59:59', 'YYYY-MM-DD HH24:MI:SS')
      )
-WHERE ROWNUM <= 5;
 ~~~
 ~~~sql
 SELECT /*+INDEX_DESC ( t IDX4RM_TRX )*/
