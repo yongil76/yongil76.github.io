@@ -20,13 +20,11 @@ last_modified_at: 2022-05-08T09:59:00-05:00
 
 ## groupingBy?
 
----
 
 > The static factory methods Collectors.groupingBy() and Collectors.groupingByConcurrent() provide us with functionality similar to the ‘GROUP BY' clause in the SQL language. We use them for grouping objects by some property and storing results in a Map instance.
 
 ## Function?
 
----
 ~~~java
 static <T,K> Collector<T,?,Map<K,List<T>>> 
   groupingBy(Function<? super T,? extends K> classifier)
@@ -50,20 +48,23 @@ public void groupingBy() {
     });
 }
 ~~~
+
 - SQL의 group by와 동일한 결과
 - Result
+
 ~~~
 Kwon 3
 Kwon 4
 Kim 5
 ~~~
+
 ---
+
 ~~~java
 static <T,K,A,D> Collector<T,?,Map<K,D>>
   groupingBy(Function<? super T,? extends K> classifier, 
     Collector<? super T,A,D> downstream)
 ~~~
-
 
 ~~~java
 @Test
@@ -92,11 +93,13 @@ public void groupingBy2() {
 - Value에 대해서 Collectors 함수를 통해서 조작이 가능
 - Reducing은 identity라는 default value를 가지고 있어야 하며, default value에 대한 처리가 필요할 수 있음
 - Result
+
 ~~~
 Kwon Kwon 7
 Kim Kim 5
 class java.util.HashMap
 ~~~
+
 ---
 
 ~~~java
@@ -128,8 +131,10 @@ public void groupingBy3() {
     System.out.println(collect.getClass());
 }
 ~~~
+
 - mapFactory를 통해 생성된 Map의 구체 클래스를 설정 가능
 - Result
+
 ~~~
 Kim Kim 5
 Kwon Kwon 7
@@ -138,9 +143,11 @@ class java.util.TreeMap
 
 ---
 ## Null Exception?
+
 - stream()을 사용할 때는, NPE에 대한 고려가 항상 필요
 
 ### key가 null일 경우?
+
 ~~~java
 public String getName() {
     if ("Kim".equals(name)) {
@@ -172,6 +179,7 @@ java.lang.NullPointerException: element cannot be mapped to a null key
 - groupingBy 함수를 통해서, 복잡한 Map 리턴 구문을 간단하게 stream으로 작성할 수 있음
 - key에 대해서 NPE가 발생하지 않도록 filter를 적절히 사용
 - 다차원 Map(Map<String, Map<String, Object>>에 대해서도 쉽게 사용이 가능
+
 ---
 
 ## Reference?
