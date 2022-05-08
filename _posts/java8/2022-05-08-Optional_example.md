@@ -146,8 +146,6 @@ class java.util.TreeMap
 
 - stream()을 사용할 때는, NPE에 대한 고려가 항상 필요
 
-### key가 null일 경우?
-
 ~~~java
 public String getName() {
     if ("Kim".equals(name)) {
@@ -157,7 +155,6 @@ public String getName() {
     return name;
 }
 ~~~
-
 - Result
 ~~~ java
 java.lang.NullPointerException: element cannot be mapped to a null key
@@ -168,9 +165,7 @@ java.lang.NullPointerException: element cannot be mapped to a null key
 .filter(item -> item.getName() != null)
 ~~~
 
-### value가 null인 경우?
-
-- NPE 발생하지 않음
+- value가 null인 경우에는 NPE가 발생하지 않음
 
 ---
 
@@ -184,6 +179,6 @@ java.lang.NullPointerException: element cannot be mapped to a null key
 
 ## Reference?
 
-- https://www.baeldung.com/java-groupingby-collector 
+- [Baeldung](https://www.baeldung.com/java-groupingby-collector)
 
 
