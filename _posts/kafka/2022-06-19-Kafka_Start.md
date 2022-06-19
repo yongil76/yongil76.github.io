@@ -221,8 +221,8 @@ public class KafkaProducer {
 
 - 테스트 방법
   - Docker에 카프카가 정상적으로 배포된 상황에서,
-  - https://github.com/yongil76/spring_kafka
-  - 프로젝트를 로컬(Spring boot)에서 띄운 후에, {localhost}:{port}/send?text={text}
+  - [spring_kafka](https://github.com/yongil76/spring_kafka)
+  - spring_kafka 프로젝트를 로컬(Spring boot)에서 띄운 후에, {localhost}:{port}/send?text={text}
 
 ---
 
