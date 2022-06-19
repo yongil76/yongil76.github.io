@@ -27,6 +27,12 @@ last_modified_at: 2022-06-19T09:59:00-05:00
 
 >What are Apache Kafka Queues? In the Apache Kafka Queueing system, messages are saved in a queue fashion. This allows messages in the queue to be ingested by one or more consumers, but one consumer can only consume each message at a time.
 
+## Zookeeper?
+
+>ZooKeeper is used in distributed systems for service synchronization and as a naming registry. When working with Apache Kafka, ZooKeeper is primarily used to track the status of nodes in the Kafka cluster and maintain a list of Kafka topics and messages.
+
+>[Apache Kafka Needs No Keeper: Removing the Apache ZooKeeper Dependency](https://www.confluent.io/ko-kr/blog/removing-zookeeper-dependency-in-kafka/)
+
 ---
 
 ## Docker에 카프카 배포해보기(Mac)
@@ -71,7 +77,7 @@ services:
 
 - docker-compose 명령어로 docker에 배포하기
 ~~~shell
-docker-compose -f ./docker-compose-single-broker.yml up
+docker-compose -f ./docker-compose-single-broker.yml up -d
 ~~~
 
 - docker container 확인
@@ -86,8 +92,8 @@ c43a5a0828a5   wurstmeister/zookeeper   "/bin/sh -c '/usr/sb…"   30 hours ago 
 73e5b16eb2e1   kafka-docker_kafka       "start-kafka.sh"         30 hours ago   Up About a minute   0.0.0.0:9092->9092/tcp                               kafka-docker-kafka-1
 ~~~
 
-- 추가적인 툴(배포 이후)
-  - Offset Explorer 2.2를 이용하면, GUI를 이용한 조작이 가능
+- UI for Apache Kafka 설치(Optional)
+
 
 
 ---
