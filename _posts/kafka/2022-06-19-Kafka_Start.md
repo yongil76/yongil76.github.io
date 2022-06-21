@@ -90,13 +90,11 @@ services:
 
 ~~~
 
-
-- > KAFKA_ADVERTISED_LISTENERS
+> KAFKA_ADVERTISED_LISTENERS
   - 카프카 접속 가능한 URL
   - localhost는 스프링 부트와 연동을 위한 URL
   
-
-- > KAFKA_LISTENERS
+> KAFKA_LISTENERS
   - 카프카 서버의 내부 리스너
   - 0.0.0.0으로 설정해야, 카프카 서버의 내부 인터페이스와 통신이 가능
   - 0.0.0.0은 카프카 서버의 모든 인터페이스에서 수신이 가능
@@ -124,9 +122,9 @@ c551173b726b   wurstmeister/zookeeper   "/bin/sh -c '/usr/sb…"   10 minutes ag
 - UI for Apache Kafka 연동
   - GUI 모니터링 툴
   - 브로커 상태 확인
-    ![](assets/images/kafka/UI_for_apache_kafka_dashboard.png)
+    ![](/assets/images/kafka/UI_for_apache_kafka_dashboard.png)
   - 토픽 메시지 확인
-    ![](assets/images/kafka/UI_for_apache_kafka_topic.png)
+    ![](/assets/images/kafka/UI_for_apache_kafka_topic.png)
 
 ---
 
