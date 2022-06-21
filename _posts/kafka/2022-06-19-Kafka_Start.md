@@ -55,8 +55,7 @@ cd kafka-docker
 vi docker-compose-single-broker.yml
 ~~~
 
-- KAFKA_ADVERTISED_HOST_NAME : 127.0.0.1로 변경
-~~~
+~~~shell
 version: '2'
 services:
   zookeeper:
@@ -66,14 +65,42 @@ services:
   kafka:
     build: .
     ports:
-      - "9092:9092"
+      - "9094:9094"
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
+      KAFKA_ADVERTISED_LISTENERS: INSIDE://:9092,OUTSIDE://localhost:9094
+      KAFKA_LISTENERS: INSIDE://:9092,OUTSIDE://0.0.0.0:9094
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
       KAFKA_CREATE_TOPICS: "test:1:1"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock\
+    depends_on:
+      - zookeeper
+  kafka-ui:
+    image: provectuslabs/kafka-ui
+    container_name: kafka-ui
+    ports:
+      - "8080:8080"
+    restart: always
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=local
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:9092
+      - KAFKA_CLUSTERS_0_ZOOKEEPER=zookeeper:2181
+
 ~~~
+
+
+- > KAFKA_ADVERTISED_LISTENERS
+  - 카프카 접속 가능한 URL
+  - localhost는 스프링 부트와 연동을 위한 URL
+  
+
+- > KAFKA_LISTENERS
+  - 카프카 서버의 내부 리스너
+  - 0.0.0.0으로 설정해야, 카프카 서버의 내부 인터페이스와 통신이 가능
+  - 0.0.0.0은 카프카 서버의 모든 인터페이스에서 수신이 가능
+
 
 - docker-compose 명령어로 docker에 배포하기
 ~~~shell
@@ -85,16 +112,21 @@ docker-compose -f ./docker-compose-single-broker.yml up -d
 docker container ls
 ~~~
 
-- docker container 명령어 결과
+- docker container 명령어
+
+~~~shell
+CONTAINER ID   IMAGE                    COMMAND                  CREATED          STATUS          PORTS                                                NAMES
+f9057c5969c0   kafka-docker_kafka       "start-kafka.sh"         10 minutes ago   Up 10 minutes   0.0.0.0:9094->9094/tcp                               kafka-docker-kafka-1
+40db6adb6d67   provectuslabs/kafka-ui   "/bin/sh -c 'java $J…"   10 minutes ago   Up 10 minutes   0.0.0.0:8080->8080/tcp                               kafka-ui
+c551173b726b   wurstmeister/zookeeper   "/bin/sh -c '/usr/sb…"   10 minutes ago   Up 10 minutes   22/tcp, 2888/tcp, 3888/tcp, 0.0.0.0:2181->2181/tcp   kafka-docker-zookeeper-1~~~
 ~~~
-CONTAINER ID   IMAGE                    COMMAND                  CREATED        STATUS              PORTS                                                NAMES
-c43a5a0828a5   wurstmeister/zookeeper   "/bin/sh -c '/usr/sb…"   30 hours ago   Up About a minute   22/tcp, 2888/tcp, 3888/tcp, 0.0.0.0:2181->2181/tcp   kafka-docker-zookeeper-1
-73e5b16eb2e1   kafka-docker_kafka       "start-kafka.sh"         30 hours ago   Up About a minute   0.0.0.0:9092->9092/tcp                               kafka-docker-kafka-1
-~~~
 
-- UI for Apache Kafka 설치(Optional)
-
-
+- UI for Apache Kafka 연동
+  - GUI 모니터링 툴
+  - 브로커 상태 확인
+    ![](assets/images/kafka/UI_for_apache_kafka_dashboard.png)
+  - 토픽 메시지 확인
+    ![](assets/images/kafka/UI_for_apache_kafka_topic.png)
 
 ---
 
@@ -138,7 +170,7 @@ public class KafkaConfiguration {
     @Bean
     public Map<String, Object> producerConfigs() {
         final Map<String, Object> props = new HashMap<>();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9094");
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         // See https://kafka.apache.org/documentation/#producerconfigs for more properties
@@ -168,7 +200,7 @@ public class KafkaConfiguration {
     @Bean
     public Map<String, Object> consumerConfigs() {
         final Map<String, Object> props = new HashMap<>();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9094");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         return props;
