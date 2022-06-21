@@ -238,9 +238,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
-/**
- * @author yongil.kwon@linecorp.com
- */
 @Component
 public class KafkaProducer {
     private final KafkaTemplate<String, String> kafkaTemplate;
