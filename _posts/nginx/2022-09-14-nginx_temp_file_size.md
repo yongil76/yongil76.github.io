@@ -59,7 +59,7 @@ last_modified_at: 2022-09-14T20:59:00-05:00
 ## nginx directive?
   - [공식 문서](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_max_temp_file_size)
   
-  ### proxy_max_temp_file_size
+### proxy_max_temp_file_size
 
   ~~~shell
     Syntax :	proxy_max_temp_file_size size;
@@ -67,7 +67,7 @@ last_modified_at: 2022-09-14T20:59:00-05:00
     Context:	http, server, location
   ~~~
 
-  ### proxy_buffering
+### proxy_buffering
 
   ~~~shell  
     Syntax:	proxy_buffering on | off;
@@ -75,7 +75,7 @@ last_modified_at: 2022-09-14T20:59:00-05:00
     Context:	http, server, location
   ~~~
 
-  ### proxy_buffer_size
+### proxy_buffer_size
 
   ~~~shell
     Syntax:	proxy_buffer_size size;
@@ -84,7 +84,7 @@ last_modified_at: 2022-09-14T20:59:00-05:00
   ~~~
 
 > nginx는 default로 buffering이 켜져있다(이 이유에 대해서는 아래서...), 버퍼링이 동작할 때 proxy_buffer_size 크기의 버퍼에 데이터가 들어가게 된다.
-> 
+
 > temp_file_size는 proxy_buffer_size를 초과하는 데이터들을 추가적으로 저장할 수 있는 크기를 정의한다. 또한, 이 temp에도 proxy_buffer_size처럼
 > 한번에 쓰여질 크기에 대해서 proxy_temp_file_write_size로 설정할 수 있다.
 
