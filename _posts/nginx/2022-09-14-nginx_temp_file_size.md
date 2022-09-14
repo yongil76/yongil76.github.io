@@ -21,11 +21,11 @@ last_modified_at: 2022-09-14T20:59:00-05:00
 
 ## Problem?
 
-> nginx를 적용한 서버에서 1GB를 넘는 파일이 받아지지 않는 상황
+nginx를 적용한 서버에서 1GB를 넘는 파일이 받아지지 않는 상황
 
 
 ## Situtaion?
-> nginx를 사용하는 스프링 어플리케이션
+nginx를 사용하는 스프링 어플리케이션
 
 ## Analysis
 
@@ -112,7 +112,7 @@ last_modified_at: 2022-09-14T20:59:00-05:00
   - 0으로 설정되면, proxy_buffering off인 상태로 데이터를 전송
   - synchronously하게 데이터를 전송함, 즉 버퍼링없이 클라이언트로 데이터 전송
    
-  > <mark style='background-color: #fff5b1'>버퍼링?</mark>
+### 버퍼링
 
   - 버퍼링이 없으면, 클라이언트 환경(속도)에 따라서 nginx와 업스트림 서버간 커넥션이 불필요하게 유지되어야 함
     - 클라이언트 환경이 빠르면, 버퍼링이 없어도 큰 영향이 없음
