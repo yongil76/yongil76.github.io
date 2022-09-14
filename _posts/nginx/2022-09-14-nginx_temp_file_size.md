@@ -60,6 +60,7 @@ last_modified_at: 2022-09-14T20:59:00-05:00
   - [공식 문서](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_max_temp_file_size)
   
   ### proxy_max_temp_file_size
+
   ~~~shell
     Syntax :	proxy_max_temp_file_size size;
     Default:	proxy_max_temp_file_size 1024m;
@@ -67,6 +68,7 @@ last_modified_at: 2022-09-14T20:59:00-05:00
   ~~~
 
   ### proxy_buffering
+
   ~~~shell  
     Syntax:	proxy_buffering on | off;
     Default:	proxy_buffering on;
@@ -74,6 +76,7 @@ last_modified_at: 2022-09-14T20:59:00-05:00
   ~~~
 
   ### proxy_buffer_size
+
   ~~~shell
     Syntax:	proxy_buffer_size size;
     Default:	proxy_buffer_size 4k|8k;
@@ -93,6 +96,7 @@ last_modified_at: 2022-09-14T20:59:00-05:00
     - ps -ef | grep nginx로 포트 확인 후 sudo kill -9 {pid}
     - nginx/sbin 경로로 이동해, ./nginx -t 테스트 명령어를 결과 확인(OK가 존재해야함)
     - 테스트가 성공적으로 끝나면, ./nginx -s reload로 재기동
+  
   - <mark style='background-color: #fff5b1'>1GB를 초과하는 파일 다운로드 후 성공 확인!</mark>
 
 ## Question
@@ -106,11 +110,14 @@ last_modified_at: 2022-09-14T20:59:00-05:00
 
   - 0으로 설정되면, proxy_buffering off인 상태로 데이터를 전송
   - synchronously하게 데이터를 전송함, 즉 버퍼링없이 클라이언트로 데이터 전송
-  - <mark style='background-color: #fff5b1'>버퍼링?</mark>
-    - 버퍼링이 없으면, 클라이언트 환경(속도)에 따라서 nginx와 업스트림 서버간 커넥션이 불필요하게 유지되어야 함
-      - 클라이언트 환경이 빠르면, 버퍼링이 없어도 큰 영향이 없음
-      - 클라이언트 환경이 느리다면, 응답을 임시로 저장할 수 없기 때문에 계속 커넥션이 유지되어야 하므로, 전체적인 리소스가 낭비
+   
+  > <mark style='background-color: #fff5b1'>버퍼링?</mark>
+
+  - 버퍼링이 없으면, 클라이언트 환경(속도)에 따라서 nginx와 업스트림 서버간 커넥션이 불필요하게 유지되어야 함
+    - 클라이언트 환경이 빠르면, 버퍼링이 없어도 큰 영향이 없음
+    - 클라이언트 환경이 느리다면, 응답을 임시로 저장할 수 없기 때문에 계속 커넥션이 유지되어야 하므로, 전체적인 리소스가 낭비
     - 버퍼링이 있으면, nginx가 응답을 임시(버퍼, temp)로 저장한 다음에 업스트림 커넥션이 더 빨리 닫아질 수 있음 
+    
   - 이 설정은 클라이언트가 모두 빠르다고 가정하고 사용해야 하는 설정
   - 버퍼링으로 인한 side-effect가 발생할 수 있음
 
