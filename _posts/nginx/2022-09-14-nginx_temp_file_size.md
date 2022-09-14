@@ -94,11 +94,16 @@ nginx를 사용하는 스프링 어플리케이션
 
   - proxy_max_temp_file_size 2048m;
   - 위 설정을 추가하고, nginx를 리로드
-    - ps -ef | grep nginx로 포트 확인 후 sudo kill -9 {pid}
-    - nginx/sbin 경로로 이동해, ./nginx -t 테스트 명령어를 결과 확인(OK가 존재해야함)
-    - 테스트가 성공적으로 끝나면, ./nginx -s reload로 재기동
-  
-  - <mark style='background-color: #fff5b1'>1GB를 초과하는 파일 다운로드 후 성공 확인!</mark>
+    
+    ~~~shell    
+    # 테스트 명령어로 설정 확인(OK가 존재해야함)
+    ./nginx -t
+    
+    # 테스트가 성공적으로 끝나면 재기동
+    ./nginx -s reload
+    ~~~
+    
+  - <mark style='background-color: #fff5b1'>1GB 초과하는 파일 다운로드 시도 후, 성공 확인!</mark>
 
 ## Question
   > proxy_max_temp_file_size 무작정 늘려도 괜찮을까?
