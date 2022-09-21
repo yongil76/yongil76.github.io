@@ -31,9 +31,9 @@ last_modified_at: 2022-09-21T09:59:00-05:00
 ### Andorid
 > A coroutine is a concurrency design pattern that you can use on Android to simplify code that executes asynchronously. 
 > Coroutines were added to Kotlin in version 1.3 and are based on established concepts from other languages.
+
 - 안드로이드라는 특정한 환경(Memory, CPU, 여러 Application)에서 동시성에 대한 제어가 쉽지 않은데, Coroutine은 그걸 쉽게 해주는 디자인 패턴 
 
----
 
 ## Block vs Suspend?
 
@@ -103,7 +103,6 @@ ProcessA Finished!
 ProcessB Finished!
 ~~~
 
----
 
 ## Dispatcher?
 - Coroutine을 스레드나 스레드 풀에 할당해주는 장치
