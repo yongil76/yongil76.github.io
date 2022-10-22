@@ -77,6 +77,7 @@ SELECT ... FOR UPDATE // Intention exclusive lock(IX)
 ### Relation
 
 ---
+
 | |X|IX|S|IS| 
 |---|---|---|---|---|
 |X|Conflict|Conflict |Conflict| Conflict| 
