@@ -20,18 +20,23 @@ last_modified_at: 2022-10-22T07:37:00-05:00
 
 ## Inno DB locking(Mysql 8.0)
 
----
 
 ### Shared lock
+
+---
 - Inno DB row-level 잠금
 - Shared lock은 트랜잭션이 row를 읽기 위해 잠금
 
 
 ### Exclusive lock
+
+---
 - Inno DB row-level 잠금
 - Exclusive lock은 트랜잭션이 row를 업데이트하거나 삭제할 수 있기 위한 잠금
 
 ### Situation(lock)
+
+---
 - 두 개의 트랜잭션(T1, T2)이 각 각 있는 상황
 - T1이 row에 대해서 Shared lock을 가지고 있고, T2가 lock을 요청하는 상황
   - T2가 요청하는 lock이, Shared lock이라면 T1, T2 모두 lock을 소유하고 있음
@@ -49,6 +54,7 @@ last_modified_at: 2022-10-22T07:37:00-05:00
   
 ### Intention lock?
 
+---
 ~~~sql
 SELECT ... FOR SHARE // Intention shared lock(IS)
 SELECT ... FOR UPDATE // Intention exclusive lock(IX)
@@ -58,14 +64,19 @@ SELECT ... FOR UPDATE // Intention exclusive lock(IX)
 - Row-level의 Exclusive lock을 얻기 위해서는, IX를 먼저 얻어야 함
 
 ### Intention shared lock(IS)
+
+---
 - Table의 Row들에 대해서 Shared lock 획득
 
 ### Intention exclusive lock(IX)
+
+---
 - Table의 Row들에 대해서 Exclusive lock 획득
 
 
 ### Relation
 
+---
 | |X|IX|S|IS| 
 |---|---|---|---|---|
 |X|Conflict|Conflict |Conflict| Conflict| 
@@ -80,6 +91,7 @@ SELECT ... FOR UPDATE // Intention exclusive lock(IX)
 
 ### Record locks
 
+---
 - Row의 인덱스 레코드에 lock
 ~~~sql
 SELECT c1 FROM t WHERE c1 = 10 FOR UPDATE;
@@ -90,6 +102,7 @@ SELECT c1 FROM t WHERE c1 = 10 FOR UPDATE;
 
 ### Gap locks
 
+---
 - Gap lock은 index 레코드들 사이(Between), 이전(before), 이후(after)에 발생하는 lock
 ~~~sql
 SELECT c1 FROM t WHERE c1 BETWEEN 10 and 20 FOR UPDATE;
@@ -121,12 +134,14 @@ SELECT * FROM child WHERE id = 100;
     
 ### Next-Key Locks
 
+---
 - 인덱스 레코드에 대한 record lock + 인덱스 레코드 이전 간격에 대한 gap lock
 - 한 트랜잭션이 record R에 대해 record lock을 가지고 있으면, 다른 트랜잭션은 신규 레코드를 즉시 삽입할 수 없음
 - 격리 수준 REPEATABLE_READ에서 Next-key Lock을 통해서 Phantom Read를 억제
 
 ### Insert Intention Locks  
 
+---
 - INSERT 쿼리가 발생되기 이전에, 발생하는 Gap lock
 - 같은 gap lock을 가진 트랜잭션들이 서로 INSERT시에 서로 기다리지 않게 하기 위함이 목적
   - 두 개의 트랜잭션이 4, 7에 gap lock을 가지고 있는 상황이라고 생각하면,
@@ -134,14 +149,12 @@ SELECT * FROM child WHERE id = 100;
   
 ### AUTO-INC Locks
 
+---
 - AUTO_INCREMENT column에 INSERT하기 위해 얻는 Table-level lock
 - 어떤 트랜잭션이, AUTO_INCREMENT column에 데이터를 삽입하는중이라면, 다른 트랜잭션들은 대기해야 한다
 - innodb_autoinc_lock_mode를 통해서 자동 증분과 관련된 알고리즘 제어를 통해서, 동시성을 확보할 수 있음
 
----
 
 ## Reference
-
---- 
 
 - https://dev.mysql.com/doc/refman/8.0/en/innodb-locking.html
