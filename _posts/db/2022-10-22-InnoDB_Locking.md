@@ -66,12 +66,12 @@ SELECT ... FOR UPDATE // Intention exclusive lock(IX)
 ### Intention shared lock(IS)
 
 ---
-- Table의 Row들에 대해서 Shared lock 획득
+- Row-level의 Shared lock을 얻기 직전에 얻는 Table-level lock
 
 ### Intention exclusive lock(IX)
 
 ---
-- Table의 Row들에 대해서 Exclusive lock 획득
+- Row-level의 Exclusive lock을 얻기 직전에 얻는 Table-level lock
 
 
 ### Relation
@@ -158,4 +158,4 @@ SELECT * FROM child WHERE id = 100;
 
 ## Reference
 
-- https://dev.mysql.com/doc/refman/8.0/en/innodb-locking.html
+- [Mysql 8.0](https://dev.mysql.com/doc/refman/8.0/en/innodb-locking.html)
