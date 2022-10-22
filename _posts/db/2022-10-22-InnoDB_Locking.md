@@ -15,6 +15,7 @@ toc_sticky: true
 toc_label: "lock"
 
 last_modified_at: 2022-10-22T07:37:00-05:00
+---
 
 ## Inno DB locking(Mysql 8.0)
 
