@@ -40,7 +40,7 @@ last_modified_at: 2022-10-22T07:37:00-05:00
 - 두 개의 트랜잭션(T1, T2)이 각 각 있는 상황
 - T1이 row에 대해서 Shared lock을 가지고 있고, T2가 lock을 요청하는 상황
   - T2가 요청하는 lock이, Shared lock이라면 T1, T2 모두 lock을 소유하고 있음
-  - T2가 요청하는 lock이, Exlcusive lock이라면 T1은 lock을 얻기 위해 기다려야함
+  - T2가 요청하는 lock이, Exlcusive lock이라면 T2는 lock을 얻기 위해 기다려야함
   
 
 - T1이 row에 대해서 Exclusive lock을 가지고 있고, T2가 lock을 요청하는 상황
