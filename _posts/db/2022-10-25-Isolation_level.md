@@ -64,7 +64,7 @@ last_modified_at: 2022-10-25T07:37:00-05:00
 
 - Gap locking이 불가능하기 때문에, 새로운 레코드가 확인되는 Phantom row 현상 발생
 - UPDATE, DELETE 발생에 대해서 오직 해당되는 row들만 lock을 잡고 있기 떄문에, deadlock을 줄이는데 효과적
-- 이미 락이 걸려 있는 Row의 Record 대해서 UPDATE가 필요할 때는, 가장 최근 커밋된 버전의 레코드를 가져와서 데이터가 일치하는지 확인하고 Lock 획득 여부를 결
+- 이미 락이 걸려 있는 Row의 Record 대해서 UPDATE가 필요할 때는, 가장 최근 커밋된 버전의 레코드를 가져와서 데이터가 일치하는지 확인하고 Lock 획득 여부를 결정
 
 ### Locking example(REPEATABLE_READ & READ_COMMITTED)
 
