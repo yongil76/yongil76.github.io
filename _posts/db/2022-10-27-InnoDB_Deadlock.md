@@ -44,8 +44,9 @@ last_modified_at: 2022-10-27T07:37:00-05:00
 ---
 
 - 두 세션이 있다고 가정하자, A, B
-- 아래 1,2,3의 숫자는 시간의 흐름으로 보면 된다
-1. A 세션
+- 아래 순서대로, 쿼리가 발생하고 있는 상황
+
+- A 세션
 
 ~~~sql
 mysql> CREATE TABLE t (i INT) ENGINE = InnoDB;
@@ -67,7 +68,7 @@ mysql> SELECT * FROM t WHERE i = 1 FOR SHARE;
 
 - A는 i = 1인 레코드에 대해서 S-lock을 발생시킨 상황
 
-2. B 세션
+- B 세션
 
 ~~~sql
 mysql> START TRANSACTION;
@@ -79,7 +80,7 @@ mysql> DELETE FROM t WHERE i = 1;
 - B는 DELETE하기 위해서는, X-lock을 얻어야 한다, 그러나 A에 의해 발생한 S-lock으로 인해서 얻을 수 없음
 - B의 요청은, lock request를 위한 queue에 들어가게 되고, B는 block이 된다
 
-3. A 세션
+- A 세션
 
 ~~~sql
 DELETE FROM t WHERE i = 1;
