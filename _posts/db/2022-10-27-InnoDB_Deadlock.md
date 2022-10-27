@@ -46,7 +46,7 @@ last_modified_at: 2022-10-27T07:37:00-05:00
 - 두 세션이 있다고 가정하자, A, B
 - 아래 순서대로, 쿼리가 발생하고 있는 상황
 
-- A 세션
+#### A 세션
 
 ~~~sql
 mysql> CREATE TABLE t (i INT) ENGINE = InnoDB;
@@ -68,7 +68,7 @@ mysql> SELECT * FROM t WHERE i = 1 FOR SHARE;
 
 - A는 i = 1인 레코드에 대해서 S-lock을 발생시킨 상황
 
-- B 세션
+#### B 세션
 
 ~~~sql
 mysql> START TRANSACTION;
@@ -80,7 +80,7 @@ mysql> DELETE FROM t WHERE i = 1;
 - B는 DELETE하기 위해서는, X-lock을 얻어야 한다, 그러나 A에 의해 발생한 S-lock으로 인해서 얻을 수 없음
 - B의 요청은, lock request를 위한 queue에 들어가게 되고, B는 block이 된다
 
-- A 세션
+#### A 세션
 
 ~~~sql
 DELETE FROM t WHERE i = 1;
@@ -95,7 +95,7 @@ ERROR 1213 (40001): Deadlock found when trying to get lock;
 try restarting transaction
 ~~~
 
-- 가장 중요한 점은, B에 의해서 lock request가 발생했을 때, A가 delete 쿼리를 발생시켰다는 것
+#### 가장 중요한 점은, B에 의해서 lock request가 발생했을 때, A가 delete 쿼리를 발생시켰다는 것
 
 
 
