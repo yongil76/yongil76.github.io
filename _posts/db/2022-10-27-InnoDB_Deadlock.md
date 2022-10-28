@@ -97,11 +97,15 @@ try restarting transaction
 
 #### 가장 중요한 점은, B에 의해서 lock request가 발생했을 때, A가 delete 쿼리를 발생시켰다는 것
 
+### Deadlock Detection
 
+---
 
-
-
-
+- Deadlock detection이 활성화되면, Inno DB는 자동으로 deadlock을 탐지하고 deadlock을 깨기 위해서, 트랜잭션 혹은 트랜잭션들을 롤백시킴
+- Inno DB는 가장 작은 단위를 롤백할 수 있는 트랜잭션을 선택한다. 작은 단위는 insert, update, delete의 수에 의존한다.
+- Inno DB는 deadlock을 탐지하기 위해서, table-level, row-level 락을 인식하고 있다.
+- 높은 동시성 시스템에서는, deadlock detection이 수많은 스레드들에 대해 성능 저하를 발생시킬 수 있음
+  - 이럴 경우, innodb_deadlock_detect를 disable하고, innodb_lock_wait_timeout 값을 적절히 사용하기도 함
 
 
 
