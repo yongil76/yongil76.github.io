@@ -107,6 +107,18 @@ try restarting transaction
 - 높은 동시성 시스템에서는, deadlock detection이 수많은 스레드들에 대해 성능 저하를 발생시킬 수 있음
   - 이럴 경우, innodb_deadlock_detect를 disable하고, innodb_lock_wait_timeout 값을 적절히 사용하기도 함
 
+### How to Minimize and Handle Deadlocks
+
+---
+
+- 트랜잭션 단위를 작게 하고, 지속시간을 짧게 가지게 하기
+- 트랜잭션의 커밋을 즉시하고, 커밋되지 않은 트랜잭션이 계속 세션을 열고 있는 일이 있도록 하지 않기
+- Locking read를 사용한다면, 낮은 격리 수준의 레벨을 사용하기(READ_COMMITTED)
+- 쿼리가 더 적은 수의 인덱스 레코드를 스캔할 수 있도록, 인덱스를 사용
+- SELECT 이전 스냅샷에서 데이터를 반환하도록 허용하는 경우, FOR UPDATE, FOR SHARE를 남용하지 말 것
+- 어떠한 방법도 도움이 되지 않는다면, 트랜잭션들을 Table-level ㅣock을 사용
+  - LOCK TABLES은 autocommit을 비활성화하고, 외부적으로 트랜잭션이 커밋될떄 까지 UNLOCK TABLES를 발생시키지 않음
+  - 단, 테이블의 교착 상태는 방지할 수 있으나 시스템의 성능은 떨어질 수 있음
 
 
 ## Reference
