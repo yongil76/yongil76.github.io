@@ -29,16 +29,14 @@ last_modified_at: 2022-11-06T09:59:00-05:00
 
 ## 필요한 지식 
 
----
 
 - [Deadlock](https://yongil76.github.io/db/InnoDB_Deadlock/)
 - [Isolation level](https://yongil76.github.io/db/Isolation_level/)
 - [Inno DB Lock](https://yongil76.github.io/db/InnoDB_Locking/)
 
+---
 
 ## 프록시 적용
-
----
 
 ~~~java
 public abstract class AbstractJobRepositoryFactoryBean implements FactoryBean<JobRepository>, InitializingBean {
@@ -73,9 +71,9 @@ public abstract class AbstractJobRepositoryFactoryBean implements FactoryBean<Jo
 
 - createJobInstance는 Proxy에 의해서, create* 메소드는 모두 REQUIRES_NEW로 진행되기 때문에 하나의 트랜잭션이라고 볼 수 있음
 
-## JobInstance 생성
-
 ---
+
+## JobInstance 생성
 
 ~~~java
 public class JdbcJobInstanceDao extends AbstractJdbcBatchMetadataDao implements JobInstanceDao, InitializingBean {
@@ -120,9 +118,9 @@ public class JdbcJobInstanceDao extends AbstractJdbcBatchMetadataDao implements 
   - JOB_NAME, JOB_KEY는 JOB_INST_UN이라는 Unique Index
   - Unique Index이기 때문에, REPEATABLE_READ 이상은 Row-level lock이 발생
 
-## 트랜잭션 상황
+---
 
---- 
+## 트랜잭션 상황
 
 - 2개의 세션에 트랜잭션 1개씩 있는데 이름을 T1, T2
   - T1, T2는 로드밸런스 환경의 서버에서 각각 발생한 트랜잭션이라고 가정
@@ -137,10 +135,11 @@ public class JdbcJobInstanceDao extends AbstractJdbcBatchMetadataDao implements 
 - T1에서,
   - INSERT 쿼리가 필요해서 lock을 요청했지만, T1에서 먼저 lock을 요청하고 있는 상황때문에 Deadlock이 발생
 
+---
 
 ## More...
 
----
-
 - 현재, Deadlock이 발생하는 환경에서 JobParameter가 동일할 수 없는데, Deadlock이 발생할 수가 없는 구조
 - JobRepostiory의 JOB_EXECUTION 테이블의 데이터도 없는 상황
+
+---
