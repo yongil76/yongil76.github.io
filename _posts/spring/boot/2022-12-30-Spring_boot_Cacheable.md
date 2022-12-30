@@ -60,8 +60,8 @@ public class CachingConfig {
 }
 ~~~
 
-- @Cacheable은 프록시 패턴이므로, 같은 클래스 내부에서 호출 시에는 효과가 없음
-  - @Transactional처럼 프록시 패턴이 적용
+- `@Cacheable`은 프록시 패턴이므로, 같은 클래스 내부에서 호출 시에는 효과가 없음
+  - `@Transactional`처럼 프록시 패턴이 적용
 
 ~~~java
 @Service
