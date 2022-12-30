@@ -26,7 +26,6 @@ last_modified_at: 2022-12-30T22:15:00-05:00
   - 실제 메모리에 접근하지 않고 캐시 메모리에 접근
 - Key, Value 구조로 사용
 
----
 
 ## @Cacheable?
 
@@ -94,7 +93,6 @@ public class StudentService {
 
 - `@CacheEvict`로 메소드가 호출되는 순간, 캐시에 있는 데이터를 Expire
 
----
 
 ## Cache는 항상 좋은가?
 
@@ -102,7 +100,6 @@ public class StudentService {
 - 캐시 적중률이 낮으면, 캐시를 처리하는 오버헤드가 오히려 증가
 - 따라서, 캐시를 무작정 사용하기보다 캐시 적중률이 충분히 발생할 수 있는 환경에서 사용하는 것이 중요
 
----
 
 ## Reference
 - [A Guide To Caching Spring](https://www.baeldung.com/spring-cache-tutorial)
